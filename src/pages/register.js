@@ -12,7 +12,7 @@ import { useState } from 'react'
 const Register = () => {
     const { register } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/mypage',
     })
 
     const [name, setName] = useState('')
@@ -41,7 +41,7 @@ const Register = () => {
                 <form onSubmit={submitForm}>
                     {/* Name */}
                     <div>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">ユーザー名</Label>
 
                         <Input
                             id="name"
@@ -58,7 +58,7 @@ const Register = () => {
 
                     {/* Email Address */}
                     <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">メールアドレス</Label>
 
                         <Input
                             id="email"
@@ -74,7 +74,7 @@ const Register = () => {
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">パスワード</Label>
 
                         <Input
                             id="password"
@@ -92,7 +92,7 @@ const Register = () => {
                     {/* Confirm Password */}
                     <div className="mt-4">
                         <Label htmlFor="passwordConfirmation">
-                            Confirm Password
+                            パスワード（確認用）
                         </Label>
 
                         <Input
@@ -112,11 +112,11 @@ const Register = () => {
                     <div className="flex items-center justify-end mt-4">
                         <Link href="/login">
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Already registered?
+                                既に登録済みの方
                             </a>
                         </Link>
 
-                        <Button className="ml-4">Register</Button>
+                        <Button className="ml-4">登録</Button>
                     </div>
                 </form>
             </AuthCard>

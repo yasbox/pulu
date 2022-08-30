@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js",
+    "export": "next build && next export"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -13,7 +14,10 @@
     "next": "^12.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "swr": "^1.2.2"
+    "react-modal": "^3.15.1",
+    "styled-components": "^5.3.5",
+    "swr": "^1.2.2",
+    "tailwind-override": "^0.6.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.12.1",
