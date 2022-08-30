@@ -16,7 +16,7 @@ const Login = () => {
 
     const { login } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/dashboard',
+        redirectIfAuthenticated: '/mypage',
     })
 
     const [email, setEmail] = useState('')
@@ -56,7 +56,7 @@ const Login = () => {
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">メールアドレス</Label>
 
                         <Input
                             id="email"
@@ -73,7 +73,7 @@ const Login = () => {
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">パスワード</Label>
 
                         <Input
                             id="password"
@@ -102,7 +102,7 @@ const Login = () => {
                             />
 
                             <span className="ml-2 text-sm text-gray-600">
-                                Remember me
+                                次回自動ログイン
                             </span>
                         </label>
                     </div>
@@ -110,11 +110,11 @@ const Login = () => {
                     <div className="flex items-center justify-end mt-4">
                         <Link href="/forgot-password">
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Forgot your password?
+                                パスワードを忘れた方
                             </a>
                         </Link>
 
-                        <Button className="ml-3">Login</Button>
+                        <Button className="ml-3">ログイン</Button>
                     </div>
                 </form>
             </AuthCard>
