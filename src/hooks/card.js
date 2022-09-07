@@ -16,12 +16,39 @@ export const useCard = ({ funcIfSuccess } = {}) => {
         for (let key in props) {
             formData.append(key, props[key])
         }
+        formData.append('face_photo', props.face_photo ? props.face_photo[0] : '')
+        formData.append('organization_logo', props.organization_logo ? props.organization_logo[0] : '')
+        formData.append('image_photo', props.image_photo ? props.image_photo[0] : '')
+
         //console.log(...formData.entries())
 
         setErrors([])
 
         axios
-            .post('/api/card/store', formData)
+            .post('/api/card/store', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(() => { funcIfSuccess() })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
+    const drop = async ({ setErrors, ...props }) => {
+        //await csrf()
+
+        // フォームオブジェクトに変換
+        const formData = new FormData()
+        formData.append('id', props.id)
+
+        setErrors([])
+
+        axios
+            .post('/api/card/drop', formData)
             .then(() => { funcIfSuccess() })
             .catch(error => {
                 if (error.response.status !== 422) throw error
@@ -33,5 +60,6 @@ export const useCard = ({ funcIfSuccess } = {}) => {
 
     return {
         store,
+        drop,
     }
 }

@@ -1,11 +1,17 @@
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Head from 'next/head'
-import { useState } from 'react'
+import useSWR from 'swr'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import axios from '@/lib/axios'
 import Modal from 'react-modal'
 import Button from '@/components/Button'
 import Link from 'next/link'
 import CardForm from '@/components/Modules/CardForm'
 import autoprefixer from 'autoprefixer'
+import Arrow from '@/components/Modules/Arrow'
+import Loading from '@/components/Modules/Loading'
+import Default from '@/components/CardDesign/Default' 
 
 const pageTitle = 'サンプル'
 
@@ -28,6 +34,27 @@ Modal.setAppElement('body')
 
 const Card = () => {
 
+    const router = useRouter()
+
+    //if (!router.isReady) return <Loading isShow={true} />
+
+    const { data: cards, error, mutate } = useSWR(router.query.uuid ? `/api/card/uuid/${router.query.uuid}` : null, () =>
+        axios
+            .get(`/api/card/uuid/${router.query.uuid}`)
+            .then(res => res.data)
+            .catch(error => {
+                console.error(error)
+                throw error
+            })
+    )
+    useEffect(() => {
+        //console.log(cards)
+    }, [cards])
+
+
+    /**
+     * モーダル設定
+     */////////////////////////////////////////////////
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
@@ -41,7 +68,10 @@ const Card = () => {
     function closeModal() {
         setIsOpen(false);
     }
+    ///////////////////////////////////////////////////
 
+    if (!cards) return <Loading isShow={true} />
+    
     return (
         <GuestLayout>
 
@@ -52,63 +82,40 @@ const Card = () => {
             <div className="py-4">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden">
-                        <div className="px-6 py-4">
-                            <img
-                                className="object-contain"
-                                src={`/images/sample-logo.jpg`}
-                                width={50}
-                                height={50}
-                            />
-                        </div>
-                        <div className="px-6 py-1 text-xl font-bold">
-                            一般社団法人日本ライオンズ
-                        </div>
-                        <div className="px-6 py-1 text-base">
-                            前理事長 2022-2023年度 理事
-                        </div>
-
-                        <div className="px-6 py-6 flex flex-wrap items-center justify-center">
-                            <div className="">
-                                <img
-                                    className="object-contain object-center m-auto"
-                                    src={`/images/sample-face.jpg`}
-                                    width={100}
-                                    height={100}
-                                />
-                            </div>
-                            <div className="px-8">
-                                <div className="text-sm tracking-[.5em]">
-                                    にしな　りょうぞう
-                                </div>
-                                <div className="py-1 text-4xl font-bold tracking-widest">
-                                    仁科良三
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="px-6 pb-6">
-                            <div className="py-2">
-                                <div className="text-sm">
-                                    〒104-0028
-                                </div>
-                                <div className="text-base">
-                                    東京都中央区八重洲2-6-15 JOTOビル9階
-                                </div>
-                            </div>
-                            <div className="text-sm tracking-widest">
-                                TEL 03-6262-1263
-                            </div>
-                            <div className="text-sm tracking-widest">
-                                FAX 03-3241-4388
-                            </div>
-                            <div className="text-sm tracking-widest">
-                                E-mail jlo@jade.plala.or.jp
-                            </div>
-                        </div>
                         
-                        <div className="px-6 py-6 text-sm border-t border-b border-gray-200">
-                            自由文
-                        </div>
+                        {cards.map((card, index) =>
+                            <div key={index}>
+
+                                {index === 0 ?
+                                    <Default
+                                        card={card}
+                                    />
+                                    :
+                                    <div className="px-6 py-4 border-b border-gray-200/100">
+                                        <Link href={`/group?uuid=${card.uuid}`}>
+                                            <a className="flex items-center justify-between">
+                                                <div>
+                                                    <div className="text-lg font-bold">
+                                                        {card.organization_name}
+                                                    </div>
+                                                    <div className="text-base">
+                                                        {card.position_name}
+                                                    </div>
+                                                    {(card.organization_name === '' && card.position_name === '') &&
+                                                        <div className="text-lg font-bold">
+                                                            {card.position_name}
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <Arrow/>
+                                            </a>
+                                        </Link>
+                                    </div>
+                                }
+                                
+                            </div>
+                        )}
+                        
                     </div>
                 </div>
             </div>
