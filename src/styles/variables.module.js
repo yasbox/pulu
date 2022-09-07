@@ -1,5 +1,5 @@
 module.exports = {
-    'mybgcolor': '#11262a',
-    'mytextcolor': '#959174',
-    'mylinkcolor': '#42818f',
+    'mybgcolor': '#ffffff',
+    'mytextcolor': '#000000',
+    'mylinkcolor': '#4169e1',
 };

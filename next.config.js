@@ -2,7 +2,8 @@
 // ホットリロードが効かない場合の対処
 module.exports = {
     //reactStrictMode: true,
-    webpackDevMiddleware: config => {
+    //webpackDevMiddleware: config => {
+    webpack: config => {
         config.watchOptions = {
             poll: 800,
             aggregateTimeout: 300,
@@ -15,6 +16,9 @@ module.exports = {
     images: {
         domains: [process.env.NEXT_PUBLIC_BACKEND_HOSTNAME],
     },
+
+    /* assetPrefix: "/sub",
+    basePath: "/sub", */
 
 
     /* async headers() {
