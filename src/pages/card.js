@@ -13,7 +13,7 @@ import Arrow from '@/components/Modules/Arrow'
 import Loading from '@/components/Modules/Loading'
 import Default from '@/components/CardDesign/Default' 
 
-const pageTitle = 'サンプル'
+const pageTitle = 'クラウド名刺'
 
 const customStyles = {
     overlay: {
@@ -76,7 +76,7 @@ const Card = () => {
         <GuestLayout>
 
             <Head>
-                <title>{pageTitle} | {process.env.NEXT_PUBLIC_APP_NAME}</title>
+                <title>{cards[0].name ? cards[0].name : pageTitle} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
             </Head>
 
             <div className="py-4">

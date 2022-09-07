@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react'
 import Input from '@/components/Input'
-import { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButton'
+import MyButton, { MyButton_lg, MyButton_md, MyButton_sm } from '@/components/Modules/MyButton'
 import Label from '@/components/Label'
 import { useCard } from '@/hooks/card'
 import InputError from '@/Components/InputError'
 import Loading from '@/components/Modules/Loading';
 
 const CardForm = ({ editCard, closeModal }) => {
-
-    const { store } = useCard({
-        funcIfSuccess: closeModal,
-    })
 
     const [uuid, setUuid] = useState(editCard ? editCard.uuid : '')
     const [name, setName] = useState(editCard ? editCard.name : '')
@@ -37,6 +33,10 @@ const CardForm = ({ editCard, closeModal }) => {
 
     const [errors, setErrors] = useState([])
 
+    /* カード登録 */
+    const { store } = useCard({
+        funcIfSuccess: closeModal,
+    })
     const submitForm = event => {
         event.preventDefault()
 
@@ -68,6 +68,7 @@ const CardForm = ({ editCard, closeModal }) => {
         }
     }, [errors])
 
+    // 顔写真フォームが変更時
     useEffect(() => {
 
         if (typeof face_photo !== "object") return
@@ -86,6 +87,7 @@ const CardForm = ({ editCard, closeModal }) => {
 
     }, [face_photo])
 
+    // ロゴフォームが変更時
     useEffect(() => {
 
         if (typeof organization_logo !== "object") return
@@ -110,80 +112,54 @@ const CardForm = ({ editCard, closeModal }) => {
                 <form onSubmit={submitForm} encType="multipart/form-data">
                     <input type="hidden" name="uuid" value={uuid} />
 
-                    <div className="py-4 bg-white border-b sticky top-[-20px] z-10">
+                    <div className="py-6 bg-white border-b sticky top-[-20px] z-10">
                         <div className="flex items-center justify-between">
-                            <button onClick={closeModal}>キャンセル</button>
-                            <span className="text-base sm:text-lg font-bold text-gray-900">
-                                {/* 名刺 */}
-                            </span>
-                            <button type="submit" className="font-bold">保存</button>
+                            <MyButton_md onClick={closeModal}>キャンセル</MyButton_md>
+                            {/* <span className="text-base sm:text-lg font-bold text-gray-900">
+                                名刺
+                            </span> */}
+                            <MyButton_lg type="submit" className="font-bold">保存</MyButton_lg>
                         </div>
                     </div>
 
                     <div className="py-4">
                         
                         <div className="my-4">
-                            <Label htmlFor="name" className="text-sm sm:text-base text-gray-900">氏名</Label>
-                            <Input
-                                id="name"
-                                type="text"
-                                name="name"
-                                value={name}
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md"
-                                onChange={event => setName(event.target.value)}
-                            />
-                            <InputError messages={errors.name} className="mt-2" />
-                        </div>
-
-                        <div className="my-4">
-                            <Label htmlFor="name_kana" className="text-sm sm:text-base text-gray-900">氏名（ふりがな）</Label>
-                            <Input
-                                id="name_kana"
-                                type="text"
-                                name="name_kana"
-                                value={name_kana}
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md"
-                                onChange={event => setName_kana(event.target.value)}
-                            />
-                            <InputError messages={errors.name_kana} className="mt-2" />
-                        </div>
-
-                        <div className="my-4">
-                            <div htmlFor="face_photo" className="text-sm sm:text-base text-gray-900">顔写真</div>
-                            <div className="mb-6 p-4 flex items-center justify-between bg-gray-100">
-                                <Input
-                                    id="face_photo"
-                                    hidden
-                                    type="file"
-                                    accept="image/*"
-                                    name="face_photo"
-                                    onChange={event => setFace_photo(event.target.files)}
-                                />
-                                <Label
-                                    htmlFor="face_photo"
-                                    className="inline-flex items-center px-3 py-1 bg-sky-500 rounded-md"
-                                >
-                                    <span className="font-semibold text-sm text-white">
-                                        画像を選択
-                                    </span>
-                                </Label>
-                                {face_photo_pre &&
+                            <div className="mb-6 py-4 flex items-center justify-between justify-self-end">
+                                {organization_logo_pre &&
                                     <div className="relative">
                                         <img
                                             className="object-contain"
-                                            src={face_photo_pre.match(/base64/) ? face_photo_pre :`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${face_photo_pre}`}
+                                            src={organization_logo_pre.match(/base64/) ? organization_logo_pre : `${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${organization_logo_pre}`}
                                             width={100}
                                             height={100}
                                         />
                                         <div
                                             className="absolute top-[-5px] right-[-5px] w-[30px] h-[30px] rounded-full rotate-45 bg-sky-500 text-white font-bold text-2xl flex items-center justify-center cursor-pointer"
-                                            onClick={() => setFace_photo(null)}
+                                            onClick={() => setOrganization_logo(null)}
                                         >
                                             +
                                         </div>
                                     </div>
                                 }
-                                <InputError messages={errors.face_photo} className="mt-2" />
+                                <Input
+                                    id="organization_logo"
+                                    hidden
+                                    type="file"
+                                    accept="image/*"
+                                    name="organization_logo"
+                                    onChange={event => setOrganization_logo(event.target.files)}
+                                />
+                                <Label
+                                    htmlFor="organization_logo"
+                                    className="inline-flex items-center ml-auto px-4 py-2 bg-sky-500 rounded-full cursor-pointer"
+                                >
+                                    <span className="font-semibold text-sm text-white">
+                                        ロゴ画像を選択
+                                    </span>
+                                </Label>
+                                
+                                <InputError messages={errors.organization_logo} className="mt-2" />
                             </div>
                         </div>
 
@@ -213,45 +189,75 @@ const CardForm = ({ editCard, closeModal }) => {
                             <InputError messages={errors.position_name} className="mt-2" />
                         </div>
 
+                        <hr className="my-8" />
+
                         <div className="my-4">
-                            <div htmlFor="organization_logo" className="text-sm sm:text-base text-gray-900">ロゴ</div>
-                            <div className="mb-6 p-4 flex items-center justify-between bg-gray-100">
-                                <Input
-                                    id="organization_logo"
-                                    hidden
-                                    type="file"
-                                    accept="image/*"
-                                    name="organization_logo"
-                                    onChange={event => setOrganization_logo(event.target.files)}
-                                />
-                                <Label
-                                    htmlFor="organization_logo"
-                                    className="inline-flex items-center px-3 py-1 bg-sky-500 rounded-md"
-                                >
-                                    <span className="font-semibold text-sm text-white">
-                                        画像を選択
-                                    </span>
-                                </Label>
-                                {organization_logo_pre &&
+                            <div className="mb-6 py-4 flex items-center justify-between">
+                                {face_photo_pre &&
                                     <div className="relative">
                                         <img
                                             className="object-contain"
-                                            src={organization_logo_pre.match(/base64/) ? organization_logo_pre : `${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${organization_logo_pre}`}
+                                            src={face_photo_pre.match(/base64/) ? face_photo_pre : `${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${face_photo_pre}`}
                                             width={100}
                                             height={100}
                                         />
                                         <div
                                             className="absolute top-[-5px] right-[-5px] w-[30px] h-[30px] rounded-full rotate-45 bg-sky-500 text-white font-bold text-2xl flex items-center justify-center cursor-pointer"
-                                            onClick={() => setOrganization_logo(null)}
+                                            onClick={() => setFace_photo(null)}
                                         >
                                             +
                                         </div>
                                     </div>
                                 }
-                                <InputError messages={errors.organization_logo} className="mt-2" />
+                                <Input
+                                    id="face_photo"
+                                    hidden
+                                    type="file"
+                                    accept="image/*"
+                                    name="face_photo"
+                                    onChange={event => setFace_photo(event.target.files)}
+                                />
+                                <Label
+                                    htmlFor="face_photo"
+                                    className="inline-flex items-center ml-auto px-4 py-2 bg-sky-500 rounded-full cursor-pointer"
+                                >
+                                    <span className="font-semibold text-sm text-white">
+                                        顔写真を選択
+                                    </span>
+                                </Label>
+                                
+                                <InputError messages={errors.face_photo} className="mt-2" />
                             </div>
                         </div>
 
+                        <div className="my-4">
+                            <Label htmlFor="name" className="text-sm sm:text-base text-gray-900">氏名<span className="ml-4 text-xs sm:text-sm text-gray-500">入力必須</span></Label>
+                            <Input
+                                id="name"
+                                type="text"
+                                name="name"
+                                value={name}
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md"
+                                onChange={event => setName(event.target.value)}
+                            />
+                            <InputError messages={errors.name} className="mt-2" />
+                        </div>
+
+                        <div className="my-4">
+                            <Label htmlFor="name_kana" className="text-sm sm:text-base text-gray-900">氏名（ふりがな）</Label>
+                            <Input
+                                id="name_kana"
+                                type="text"
+                                name="name_kana"
+                                value={name_kana}
+                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md"
+                                onChange={event => setName_kana(event.target.value)}
+                            />
+                            <InputError messages={errors.name_kana} className="mt-2" />
+                        </div>
+
+                        <hr className="my-8" />
+                            
                         <div className="my-4">
                             <Label htmlFor="zip" className="text-sm sm:text-base text-gray-900">郵便番号</Label>
                             <Input
@@ -344,7 +350,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="description" className="text-sm sm:text-base text-gray-900">説明</Label>
+                            <Label htmlFor="description" className="text-sm sm:text-base text-gray-900">自由文</Label>
                             <textarea
                                 id="description"
                                 type="text"
@@ -381,6 +387,8 @@ const CardForm = ({ editCard, closeModal }) => {
                             />
                             <InputError messages={errors.sort_num} className="mt-2" />
                         </div> */}
+
+                        <hr className="my-8" />
 
                         <div className="my-4">
                             <p className="text-sm sm:text-base text-gray-900">公開設定</p>
