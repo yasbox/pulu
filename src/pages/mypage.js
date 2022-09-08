@@ -18,7 +18,7 @@ import MyButton, { MyButton_lg, MyButton_sm, MyButton_add } from '@/components/M
 import { QRCodeSVG } from "qrcode.react"
 import { useAuth } from '@/hooks/auth'
 
-const pageTitle = 'マイページ'
+const pageTitle = 'マイ名刺'
 
 /***********************************************
  * モーダル設定
@@ -138,13 +138,12 @@ const Mypage = () => {
             }>
 
             <Head>
-                <title>{pageTitle} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+                <title>{process.env.NEXT_PUBLIC_APP_NAME} - {pageTitle}</title>
             </Head>
 
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 overflow-hidden">
                 <div className="m-6 text-right">
                     <MyButton_add
-                        className="text-xl"
                         onClick={() => openModal(null)}
                     >
                         +
@@ -156,36 +155,36 @@ const Mypage = () => {
 
                 {/* カードリスト */}
                 {cards?.map((card, index) => (
-                    <div key={index} className="w-[100%] md:w-[50%] md:px-4 lg:px-6 mb-4">
+                    <div key={index} className="w-[100%] lg:w-[50%] md:px-4 lg:px-6 mb-8">
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="p-6">
 
-                                <Default
-                                    card={card}
-                                />
+                            <Default
+                                card={card}
+                            />
 
-                                <div className="pt-6 flex flex-wrap items-center justify-end">
+                            <hr />
 
-                                    <MyButton_sm onClick={() => openQrModal(card.uuid)}>
-                                        QR
-                                    </MyButton_sm>
+                            <div className="p-4 flex items-center justify-around">
 
-                                    <Link href={`/card?uuid=${card.uuid}`}>
-                                        <a target="blanck_">
-                                            <MyButton_sm>
-                                                プレビュー
-                                            </MyButton_sm>
-                                        </a>
-                                    </Link>
+                                <MyButton_sm onClick={() => openQrModal(card.uuid)}>
+                                    QR
+                                </MyButton_sm>
 
-                                    <MyButton_sm onClick={() => dropCard(card.id)}>
-                                        削除
-                                    </MyButton_sm>
-                                    
-                                    <MyButton_sm onClick={() => openModal(card.id)}>
-                                        編集
-                                    </MyButton_sm>
-                                </div>
+                                <Link href={`/card/?uuid=${card.uuid}`}>
+                                    <a target="blanck_">
+                                        <MyButton_sm>
+                                            プレビュー
+                                        </MyButton_sm>
+                                    </a>
+                                </Link>
+
+                                <MyButton_sm onClick={() => dropCard(card.id)}>
+                                    削除
+                                </MyButton_sm>
+
+                                <MyButton_sm onClick={() => openModal(card.id)}>
+                                    編集
+                                </MyButton_sm>
                             </div>
                         </div>
                     </div>

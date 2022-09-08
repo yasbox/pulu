@@ -33,7 +33,7 @@ const Register = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="w-auto h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
                 }>
@@ -41,7 +41,7 @@ const Register = () => {
                 <form onSubmit={submitForm}>
                     {/* Name */}
                     <div>
-                        <Label htmlFor="name">ユーザー名</Label>
+                        <Label htmlFor="name">アカウント名</Label>
 
                         <Input
                             id="name"
@@ -112,7 +112,7 @@ const Register = () => {
                     <div className="flex items-center justify-end mt-4">
                         <Link href="/login">
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                既に登録済みの方
+                                ログインはこちら
                             </a>
                         </Link>
 

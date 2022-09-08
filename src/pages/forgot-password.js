@@ -29,15 +29,13 @@ const ForgotPassword = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="w-auto h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
                 }>
 
-                <div className="mb-4 text-sm text-gray-600">
-                    Forgot your password? No problem. Just let us know your
-                    email address and we will email you a password reset link
-                    that will allow you to choose a new one.
+                <div className="mb-4 text-base text-gray-600">
+                    パスワードを忘れた場合は、新しいパスワードを再設定できます。
                 </div>
 
                 {/* Session Status */}
@@ -46,7 +44,7 @@ const ForgotPassword = () => {
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">登録済みのメールアドレス</Label>
                         <Input
                             id="email"
                             type="email"
@@ -62,7 +60,7 @@ const ForgotPassword = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Email Password Reset Link</Button>
+                        <Button>再設定リンクを送信</Button>
                     </div>
                 </form>
             </AuthCard>

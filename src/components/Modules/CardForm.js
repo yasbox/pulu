@@ -106,13 +106,20 @@ const CardForm = ({ editCard, closeModal }) => {
 
     }, [organization_logo])
 
+    // テキストエリア高さ自動調整
+    useEffect(() => {
+        let textarea = document.getElementById('description');
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 10 + 'px';
+    }, [description])
+
     return (
         <div className="max-w-lg mx-auto sm:px-6 lg:px-8">
             <div className="bg-white">
                 <form onSubmit={submitForm} encType="multipart/form-data">
                     <input type="hidden" name="uuid" value={uuid} />
 
-                    <div className="py-6 bg-white border-b sticky top-[-20px] z-10">
+                    <div className="py-2 bg-white border-b sticky top-[-20px] z-10">
                         <div className="flex items-center justify-between">
                             <MyButton_md onClick={closeModal}>キャンセル</MyButton_md>
                             {/* <span className="text-base sm:text-lg font-bold text-gray-900">
@@ -164,7 +171,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="organization_name" className="text-sm sm:text-base text-gray-900">会社・組織・団体名</Label>
+                            <Label htmlFor="organization_name" className="text-sm sm:text-base text-gray-600">会社・組織・団体名</Label>
                             <Input
                                 id="organization_name"
                                 type="text"
@@ -177,7 +184,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="position_name" className="text-sm sm:text-base text-gray-900">役職等</Label>
+                            <Label htmlFor="position_name" className="text-sm sm:text-base text-gray-600">役職等</Label>
                             <Input
                                 id="position_name"
                                 type="text"
@@ -231,7 +238,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="name" className="text-sm sm:text-base text-gray-900">氏名<span className="ml-4 text-xs sm:text-sm text-gray-500">入力必須</span></Label>
+                            <Label htmlFor="name" className="text-sm sm:text-base text-gray-600">氏名<span className="ml-4 text-xs sm:text-sm text-gray-500">入力必須</span></Label>
                             <Input
                                 id="name"
                                 type="text"
@@ -244,7 +251,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="name_kana" className="text-sm sm:text-base text-gray-900">氏名（ふりがな）</Label>
+                            <Label htmlFor="name_kana" className="text-sm sm:text-base text-gray-600">ふりがな<span className="ml-4 text-xs sm:text-sm text-gray-500">アルファベットなども可</span></Label>
                             <Input
                                 id="name_kana"
                                 type="text"
@@ -259,7 +266,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         <hr className="my-8" />
                             
                         <div className="my-4">
-                            <Label htmlFor="zip" className="text-sm sm:text-base text-gray-900">郵便番号</Label>
+                            <Label htmlFor="zip" className="text-sm sm:text-base text-gray-600">郵便番号</Label>
                             <Input
                                 id="zip"
                                 type="text"
@@ -272,7 +279,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="address" className="text-sm sm:text-base text-gray-900">住所</Label>
+                            <Label htmlFor="address" className="text-sm sm:text-base text-gray-600">住所</Label>
                             <Input
                                 id="address"
                                 type="text"
@@ -285,7 +292,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="tel" className="text-sm sm:text-base text-gray-900">TEL</Label>
+                            <Label htmlFor="tel" className="text-sm sm:text-base text-gray-600">TEL</Label>
                             <Input
                                 id="tel"
                                 type="text"
@@ -298,7 +305,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="tel2" className="text-sm sm:text-base text-gray-900">TEL2</Label>
+                            <Label htmlFor="tel2" className="text-sm sm:text-base text-gray-600">TEL2</Label>
                             <Input
                                 id="tel2"
                                 type="text"
@@ -311,7 +318,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="fax" className="text-sm sm:text-base text-gray-900">FAX</Label>
+                            <Label htmlFor="fax" className="text-sm sm:text-base text-gray-600">FAX</Label>
                             <Input
                                 id="fax"
                                 type="text"
@@ -324,7 +331,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="email" className="text-sm sm:text-base text-gray-900">メールアドレス</Label>
+                            <Label htmlFor="email" className="text-sm sm:text-base text-gray-600">メールアドレス</Label>
                             <Input
                                 id="email"
                                 type="text"
@@ -337,7 +344,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="site" className="text-sm sm:text-base text-gray-900">ホームページ</Label>
+                            <Label htmlFor="site" className="text-sm sm:text-base text-gray-600">ホームページ</Label>
                             <Input
                                 id="site"
                                 type="text"
@@ -350,7 +357,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         <div className="my-4">
-                            <Label htmlFor="description" className="text-sm sm:text-base text-gray-900">自由文</Label>
+                            <Label htmlFor="description" className="text-sm sm:text-base text-gray-600">自由文</Label>
                             <textarea
                                 id="description"
                                 type="text"
@@ -363,7 +370,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div>
 
                         {/* <div className="my-4">
-                            <Label htmlFor="image_photo" className="text-sm sm:text-base text-gray-900">イメージ写真</Label>
+                            <Label htmlFor="image_photo" className="text-sm sm:text-base text-gray-600">イメージ写真</Label>
                             <Input
                                 id="image_photo"
                                 type="text"
@@ -376,7 +383,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         </div> */}
 
                         {/* <div className="my-4">
-                            <Label htmlFor="sort_num" className="text-sm sm:text-base text-gray-900">優先順位</Label>
+                            <Label htmlFor="sort_num" className="text-sm sm:text-base text-gray-600">優先順位</Label>
                             <Input
                                 id="sort_num"
                                 type="text"
@@ -391,7 +398,7 @@ const CardForm = ({ editCard, closeModal }) => {
                         <hr className="my-8" />
 
                         <div className="my-4">
-                            <p className="text-sm sm:text-base text-gray-900">公開設定</p>
+                            <p className="text-sm sm:text-base text-gray-900 font-bold">公開設定</p>
 
                             <ul className="flex flex-wrap">
                                 {valids.map((item, index) =>

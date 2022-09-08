@@ -44,7 +44,7 @@ const PasswordReset = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="w-auto h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
                 }>
@@ -54,7 +54,7 @@ const PasswordReset = () => {
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">メールアドレス</Label>
 
                         <Input
                             id="email"
@@ -71,7 +71,7 @@ const PasswordReset = () => {
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">パスワード</Label>
                         <Input
                             id="password"
                             type="password"
@@ -87,7 +87,7 @@ const PasswordReset = () => {
                     {/* Confirm Password */}
                     <div className="mt-4">
                         <Label htmlFor="passwordConfirmation">
-                            Confirm Password
+                            パスワード（同じもの）
                         </Label>
 
                         <Input
@@ -105,7 +105,7 @@ const PasswordReset = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Reset Password</Button>
+                        <Button>パスワードをリセット</Button>
                     </div>
                 </form>
             </AuthCard>

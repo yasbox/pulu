@@ -16,37 +16,41 @@ const Navigation = ({ user }) => {
     const [open, setOpen] = useState(false)
 
     return (
-        <nav className="bg-white border-b border-gray-100">
-            {/* Primary Navigation Menu */}
+        <nav className="fixed w-full bg-gray-900 shadow-sm">
+
+            {/* メインメニュー */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex">
-                        {/* Logo */}
+
+                        {/* ロゴ */}
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href="/mypage">
+                            <Link href="/">
                                 <a>
                                     <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+                                    {/* <ApplicationLogo className="block h-10 w-auto fill-current text-gray-600 invert-[1] sepia-[0] saturate-[0] hue-rotate-[84deg] brightness-[1.04] contrast-[1.05]" /> */}
                                 </a>
                             </Link>
                         </div>
 
-                        {/* Navigation Links */}
+                        {/* ナビゲーション */}
                         <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink
                                 href="/mypage"
-                                active={router.pathname === '/mypage'}>
-                                マイページ
+                                active={router.pathname === '/mypage'}
+                            >
+                                マイ名刺
                             </NavLink>
                         </div>
                     </div>
 
-                    {/* Settings Dropdown */}
+                    {/* ドロップダウン */}
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
                         <Dropdown
                             align="right"
                             width="48"
                             trigger={
-                                <button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
+                                <button className="flex items-center text-lg font-medium text-gray-400 hover:text-gray-200 tracking-widest focus:outline-none transition duration-150 ease-in-out">
                                     <div>{user?.name}</div>
 
                                     <div className="ml-1">
@@ -64,20 +68,20 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
 
-                            {/* Authentication */}
+                            {/* アカウント */}
                             <DropdownButton onClick={logout}>
                                 ログアウト
                             </DropdownButton>
                         </Dropdown>
                     </div>
 
-                    {/* Hamburger */}
+                    {/* メニューボタン */}
                     <div className="-mr-2 flex items-center sm:hidden">
                         <button
                             onClick={() => setOpen(open => !open)}
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                             <svg
-                                className="h-6 w-6"
+                                className="h-8 w-8"
                                 stroke="currentColor"
                                 fill="none"
                                 viewBox="0 0 24 24">
@@ -104,18 +108,18 @@ const Navigation = ({ user }) => {
                 </div>
             </div>
 
-            {/* Responsive Navigation Menu */}
+            {/* モバイルメニュー */}
             {open && (
-                <div className="block sm:hidden">
+                <div className="m-4 p-4 bg-white block sm:hidden shadow-sm rounded-lg">
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
                             href="/mypage"
                             active={router.pathname === '/mypage'}>
-                            マイページ
+                            マイ名刺
                         </ResponsiveNavLink>
                     </div>
 
-                    {/* Responsive Settings Options */}
+                    {/* モバイルナビゲーション */}
                     <div className="pt-4 pb-1 border-t border-gray-200/100">
                         <div className="flex items-center px-4">
                             <div className="flex-shrink-0">
@@ -145,7 +149,7 @@ const Navigation = ({ user }) => {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            {/* Authentication */}
+                            {/* アカウント */}
                             <ResponsiveNavButton onClick={logout}>
                                 ログアウト
                             </ResponsiveNavButton>
