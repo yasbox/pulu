@@ -45,7 +45,7 @@ const Login = () => {
                 logo={
                     <Link href="/">
                         <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                            <ApplicationLogo className="w-auto h-20 fill-current text-gray-500" />
                         </a>
                     </Link>
                 }>

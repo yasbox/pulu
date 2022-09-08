@@ -7,9 +7,12 @@ const GuestLayout = ({ children }) => {
                 <title></title>
             </Head>
 
-            <div className="font-sans text-gray-900 antialiased">
-                {children}
+            <div className="min-h-screen bg-gray-100">
+                <div className="font-sans text-gray-900 antialiased">
+                    {children}
+                </div>
             </div>
+            
         </div>
     )
 }

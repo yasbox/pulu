@@ -81,7 +81,7 @@ const Card = () => {
 
             <div className="py-4">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden">
+                    <div className="sm:p-6 max-w-4xl mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         
                         {cards.map((card, index) =>
                             <div key={index}>

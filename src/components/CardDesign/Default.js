@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const Default = ({ card }) => (
     <>
-        <div className="px-6 py-6 flex items-center">
+        <div className="px-6 py-6 flex items-start">
             {card.organization_logo &&
                 <div className="mr-4 w-[80px] h-[60px]">
                     <img
@@ -43,15 +43,14 @@ const Default = ({ card }) => (
             
             <div className="mx-8 my-3">
 
+                {card.name &&
+                    <div className="py-2 text-center text-4xl font-bold tracking-widest">
+                        {card.name}
+                    </div>
+                }
                 {card.name_kana &&
                     <div className="text-sm text-center tracking-[.3em]">
                         {card.name_kana}
-                    </div>
-                }
-
-                {card.name &&
-                    <div className="py-1 text-center text-4xl font-bold tracking-widest">
-                        {card.name}
                     </div>
                 }
                 
@@ -68,7 +67,7 @@ const Default = ({ card }) => (
                 }
 
                 {card.address &&
-                    <div className="text-base">
+                    <div className="text-base font-bold">
                         {card.address}
                     </div>
                 }
