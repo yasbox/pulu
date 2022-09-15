@@ -57,9 +57,32 @@ export const useCard = ({ funcIfSuccess } = {}) => {
             })
     }
 
+    const sort = async ({ setErrors, ...props }) => {
+        //await csrf()
+
+        const sortedCards = {
+            'sortedCards': JSON.stringify(props.cardboxs)
+        }
+
+        setErrors([])
+
+        axios
+            .post('/api/card/sort', sortedCards, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(() => { funcIfSuccess() })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
 
     return {
         store,
         drop,
+        sort,
     }
 }
