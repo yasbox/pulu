@@ -1,14 +1,10 @@
-import GuestLayout from '@/components/Layouts/GuestLayout'
 import Head from 'next/head'
 import useSWR from 'swr'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from '@/lib/axios'
 import Modal from 'react-modal'
-import Button from '@/components/Button'
 import Link from 'next/link'
-import CardForm from '@/components/Modules/CardForm'
-import autoprefixer from 'autoprefixer'
 import Arrow from '@/components/Modules/Arrow'
 import Loading from '@/components/Modules/Loading'
 import Default from '@/components/CardDesign/Default' 
@@ -35,6 +31,7 @@ Modal.setAppElement('body')
 const Card = () => {
 
     const router = useRouter()
+    const [cardsTemp, setCardsTemp] = useState(null)
 
     //if (!router.isReady) return <Loading isShow={true} />
 
@@ -48,9 +45,9 @@ const Card = () => {
             })
     )
     useEffect(() => {
+        setCardsTemp(cards)
         //console.log(cards)
     }, [cards])
-
 
     /**
      * モーダル設定
@@ -66,57 +63,84 @@ const Card = () => {
     }
 
     function closeModal() {
-        setIsOpen(false);
+        setIsOpen(false)
     }
     ///////////////////////////////////////////////////
 
-    if (!cards) return <Loading isShow={true} />
+
+    const changeCardsSort = (card_id) => {
+        setCardsTemp(null)
+        setTimeout(() => {
+            setCardsTemp(() => {
+                let sortedCards = cardsTemp.filter((card) => card.id !== card_id)
+                sortedCards.unshift(cards.filter((card) => card.id === card_id)[0])
+                return sortedCards
+            })
+        }, 500)
+    }
+
+    if (!cardsTemp) return <Loading isShow={true} />
     
     return (
-        <GuestLayout>
-
+        <>
             <Head>
-                <title>{cards[0].name ? cards[0].name : pageTitle} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+                <title>{cardsTemp[0].name ? cardsTemp[0].name : pageTitle} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
             </Head>
 
-            <div className="py-4">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="sm:p-6 max-w-4xl mx-auto bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        
-                        {cards.map((card, index) =>
-                            <div key={index}>
+            <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+                <div className="w-full pb-16 flex items-center justify-center min-h-screen bg-my-bgcolor">
+                    <div className="w-full max-w-7xl mx-auto p-2 sm:px-6 lg:px-8">
+                        <div className="sm:p-6 max-w-4xl mx-auto bg-white overflow-hidden shadow-lg rounded-lg divide-y divide-slate-200">
 
-                                {index === 0 ?
-                                    <Default
-                                        card={card}
-                                    />
-                                    :
-                                    <div className="px-6 py-4 border-b border-gray-200/100">
-                                        <Link href={`/group?uuid=${card.uuid}`}>
-                                            <a className="flex items-center justify-between">
-                                                <div>
-                                                    <div className="text-lg font-bold">
-                                                        {card.organization_name}
-                                                    </div>
-                                                    <div className="text-base">
-                                                        {card.position_name}
-                                                    </div>
-                                                    {(card.organization_name === '' && card.position_name === '') &&
-                                                        <div className="text-lg font-bold">
-                                                            {card.position_name}
-                                                        </div>
-                                                    }
+                            {cardsTemp.map((card, index) =>
+                                <div key={index}>
+
+                                    {index === 0 ?
+                                        <>
+                                            <Default
+                                                card={card}
+                                            />
+                                            {cardsTemp.length > 1 &&
+                                                <div className="mt-6 p-6 text-base text-gray-500">
+                                                    その他の名刺
                                                 </div>
-                                                <Arrow/>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                }
-                                
-                            </div>
-                        )}
-                        
+                                            }
+                                        </>
+                                        :
+                                        <div
+                                            className="px-6 py-4 flex items-center justify-between cursor-pointer"
+                                            onClick={() => changeCardsSort(card.id)}
+                                        >
+                                            <div className="">
+                                                <div className="text-lg font-bold">
+                                                    {card.organization_name}
+                                                </div>
+                                                <div className="text-base">
+                                                    {card.position_name}
+                                                </div>
+                                                {(card.organization_name === '' && card.position_name === '') &&
+                                                    <div className="text-lg font-bold">
+                                                        {card.name}
+                                                    </div>
+                                                }
+                                            </div>
+                                            <Arrow />
+                                        </div>
+                                    }
+
+                                </div>
+                            )}
+
+                        </div>
                     </div>
+                </div>
+
+                <div className="absolute bottom-0 w-full px-2 py-4 sm:py-8 flex items-center justify-center">
+                    <Link href="/">
+                        <a className="text-sm text-gray-500">
+                            <span className="mr-2 text-xs text-gray-400">Powerd by</span>{process.env.NEXT_PUBLIC_APP_NAME}
+                        </a>
+                    </Link>
                 </div>
             </div>
 
@@ -130,7 +154,7 @@ const Card = () => {
                 モーダル
             </Modal>
 
-        </GuestLayout>
+        </>
     )
 }
 

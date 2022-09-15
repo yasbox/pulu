@@ -25,11 +25,12 @@ const CardForm = ({ editCard, closeModal }) => {
     const [description, setDescription] = useState(editCard ? editCard.description : '')
     //const [image_photo, setImage_photo] = useState(editCard ? editCard.image_photo : null)
     //const [sort_num, setSort_num] = useState(editCard ? editCard.sort_num : '')
-    const [valid, setValid] = useState(editCard ? String(editCard.valid) : '1')
-
+    const [is_list, setIs_list] = useState(editCard ? String(editCard.is_list) : '0')
+    const [is_share, setIs_share] = useState(editCard ? String(editCard.is_share) : '0')
     const [face_photo_pre, setFace_photo_pre] = useState(editCard ? editCard.face_photo : null)
     const [organization_logo_pre, setOrganization_logo_pre] = useState(editCard ? editCard.organization_logo : null)
-    const valids = ['する', 'しない']
+    const is_lists = ['する', 'しない']
+    const is_shares = ['する', 'しない']
 
     const [errors, setErrors] = useState([])
 
@@ -58,7 +59,8 @@ const CardForm = ({ editCard, closeModal }) => {
             description,
             //image_photo,
             //sort_num,
-            valid,
+            is_list,
+            is_share,
             setErrors
         })
     }
@@ -119,7 +121,7 @@ const CardForm = ({ editCard, closeModal }) => {
                 <form onSubmit={submitForm} encType="multipart/form-data">
                     <input type="hidden" name="uuid" value={uuid} />
 
-                    <div className="py-2 bg-white border-b sticky top-[-20px] z-10">
+                    <div className="p-2 bg-white border-b sticky top-[-20px] z-10 drop-shadow mx-[-20px] sm:mx-[-60px]">
                         <div className="flex items-center justify-between">
                             <MyButton_md onClick={closeModal}>キャンセル</MyButton_md>
                             {/* <span className="text-base sm:text-lg font-bold text-gray-900">
@@ -397,24 +399,59 @@ const CardForm = ({ editCard, closeModal }) => {
 
                         <hr className="my-8" />
 
-                        <div className="my-4">
-                            <p className="text-sm sm:text-base text-gray-900 font-bold">公開設定</p>
-
-                            <ul className="flex flex-wrap">
-                                {valids.map((item, index) =>
-                                    <li key={index} className="flex flex-nowrap items-center py-3 pr-10">
+                        <div className="my-4 flex flex-wrap sm:flex-nowrap items-center justify-between">
+                            <div className="sm:max-w-[50%]">
+                                <p className="text-base text-gray-900 font-bold">名刺リストの表示</p>
+                                <p className="my-2 text-sm text-gray-800 font-light">
+                                    この名刺の下部に他の名刺リストを表示するかどうか
+                                </p>
+                            </div>
+                            <ul className="w-full sm:w-auto flex flex-wrap items-center justify-end sm:justify-between">
+                                {is_lists.map((item, index) =>
+                                    <li key={index} className="flex flex-nowrap items-center py-3 mx-5">
                                         <Input
                                             type="radio"
-                                            id={'valid-' + index}
-                                            name="valid"
-                                            value={String(valids.length - index - 1)} // index番号反転
-                                            checked={valid === String(valids.length - index - 1)} // index番号反転
-                                            onChange={event => setValid(event.target.value)}
+                                            id={'is_list-' + index}
+                                            name="is_list"
+                                            value={String(is_lists.length - index - 1)} // index番号反転
+                                            checked={is_list === String(is_lists.length - index - 1)} // index番号反転
+                                            onChange={event => setIs_list(event.target.value)}
                                         />
                                         <Label
-                                            htmlFor={'valid-' + index}
+                                            htmlFor={'is_list-' + index}
                                             className="ml-2 text-base font-medium text-gray-900">
-                                            {item}
+                                            <span className="text-base">{item}</span>
+                                        </Label>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+
+                        <hr className="my-8" />
+
+                        <div className="my-4 flex flex-wrap sm:flex-nowrap items-center justify-between">
+                            <div className="sm:max-w-[50%]">
+                                <p className="text-base text-gray-900 font-bold">名刺リスト共有</p>
+                                <p className="my-2 text-sm text-gray-800 font-light">
+                                    この名刺を他の名刺のリスト表示に含めるかどうか
+                                </p>
+                            </div>
+
+                            <ul className="w-full sm:w-auto flex flex-wrap items-center justify-end sm:justify-between">
+                                {is_shares.map((item, index) =>
+                                    <li key={index} className="flex flex-nowrap items-center py-3 mx-5">
+                                        <Input
+                                            type="radio"
+                                            id={'is_share-' + index}
+                                            name="is_share"
+                                            value={String(is_shares.length - index - 1)} // index番号反転
+                                            checked={is_share === String(is_shares.length - index - 1)} // index番号反転
+                                            onChange={event => setIs_share(event.target.value)}
+                                        />
+                                        <Label
+                                            htmlFor={'is_share-' + index}
+                                            className="ml-2 text-base font-medium text-gray-900">
+                                            <span className="text-base">{item}</span>
                                         </Label>
                                     </li>
                                 )}

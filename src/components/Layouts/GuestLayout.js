@@ -1,8 +1,17 @@
 import Head from 'next/head'
+import Navigation from '@/components/Layouts/Navigation'
 
 const GuestLayout = ({ children }) => {
     return (
-        <div>
+        <div className="flex min-h-screen bg-gray-100">
+            <Navigation />
+
+            {/* Page Content */}
+            <main className="grow">{children}</main>
+        </div>
+    )
+
+    {/* <div>
             <Head>
                 <title></title>
             </Head>
@@ -13,8 +22,7 @@ const GuestLayout = ({ children }) => {
                 </div>
             </div>
             
-        </div>
-    )
+        </div> */}
 }
 
 export default GuestLayout

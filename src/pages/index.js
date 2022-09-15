@@ -15,7 +15,7 @@ export default function Home() {
             <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
                 <div className="fixed top-0 right-0 px-6 py-4">
                     {user ?
-                        <Link href="/mypage">
+                        <Link href="/home">
                             <a className="ml-4 text-sm text-gray-700">
                                 マイ名刺
                             </a>
