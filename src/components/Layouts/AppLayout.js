@@ -3,9 +3,9 @@ import { useAuth } from '@/hooks/auth'
 
 const AppLayout = ({ header, children }) => {
     const { user } = useAuth({ middleware: 'auth' })
-
+    
     return (
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="flex min-h-screen">
             <Navigation user={user} />
 
             {/* Page Heading */}

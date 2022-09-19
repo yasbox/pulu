@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Modal from 'react-modal'
 import MyModal, { MyModal_dark } from '@/components/Modules/MyModal'
-import Button from '@/components/Button'
 import Link from 'next/link'
 import CardForm from '@/components/Modules/CardForm'
 import Loading from '@/components/Modules/Loading'
@@ -101,10 +100,14 @@ const home = () => {
         Swal.fire({
             title: '本当に削除しますか？',
             text: "削除すると元に戻せません",
-            icon: 'warning',
+            /* icon: 'warning', */
             showCancelButton: true,
-            confirmButtonText: '削除',
+            confirmButtonText: '削除する',
             cancelButtonText: 'キャンセル',
+            customClass: {
+                confirmButton: 'bg-gray-100 text-black font-semibold rounded-full',
+                cancelButton: 'bg-gray-100 text-black font-semibold rounded-full',
+            }
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -195,9 +198,9 @@ const home = () => {
     return (
         <AppLayout
             header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                {/* <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                     {pageTitle}
-                </h2>
+                </h2> */}
             }>
 
             <Head>
@@ -216,17 +219,17 @@ const home = () => {
                 </div>
             }
 
-            {cards.length > 1 &&
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 overflow-hidden flex flex-wrap items-center justify-end">
-                    <div className="m-4 sm:m-6">
+            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 overflow-hidden flex flex-wrap items-center justify-end">
+                <div className="m-4 sm:m-6">
+                    {cards.length > 1 &&
                         <MyButton_sm
                             onClick={() => onSortButton()}
                         >
-                            {isSortMode ? '終了' : '並び替え'}
+                            {isSortMode ? '終了' : '並べ替え'}
                         </MyButton_sm>
-                    </div>
+                    }
                 </div>
-            }
+            </div>
 
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-24">
 

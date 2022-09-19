@@ -1,7 +1,7 @@
 const ApplicationLogo = props => (
     <img
-        src="/logo/saito-desu-logo.png"
-        alt="クラウド名刺サービス 斉藤です"
+        src="/logo/logo_icon.png"
+        alt={process.env.NEXT_PUBLIC_APP_NAME}
         {...props}
     />
 )

@@ -4,7 +4,6 @@ import MyButton, { MyButton_lg, MyButton_md, MyButton_sm } from '@/components/Mo
 import Label from '@/components/Label'
 import { useCard } from '@/hooks/card'
 import InputError from '@/Components/InputError'
-import Loading from '@/components/Modules/Loading';
 
 const CardForm = ({ editCard, closeModal }) => {
 
@@ -121,14 +120,14 @@ const CardForm = ({ editCard, closeModal }) => {
                 <form onSubmit={submitForm} encType="multipart/form-data">
                     <input type="hidden" name="uuid" value={uuid} />
 
-                    <div className="p-2 bg-white border-b sticky top-[-20px] z-10 drop-shadow mx-[-20px] sm:mx-[-60px]">
+                    <div className="py-2 bg-white border-b sticky top-[-20px] z-10">
                         <div className="flex items-center justify-between">
                             <MyButton_md onClick={closeModal}>キャンセル</MyButton_md>
-                            {/* <span className="text-base sm:text-lg font-bold text-gray-900">
-                                名刺
-                            </span> */}
                             <MyButton_lg type="submit" className="font-bold">保存</MyButton_lg>
                         </div>
+                        {Object.keys(errors).length !== 0 &&
+                            <div className="mt-2 text-red-500 text-sm text-center">ご入力内容に不備があります。</div>
+                        }
                     </div>
 
                     <div className="py-4">
@@ -401,9 +400,9 @@ const CardForm = ({ editCard, closeModal }) => {
 
                         <div className="my-4 flex flex-wrap sm:flex-nowrap items-center justify-between">
                             <div className="sm:max-w-[50%]">
-                                <p className="text-base text-gray-900 font-bold">名刺リストの表示</p>
+                                <p className="text-base text-gray-900 font-bold">他の名刺も一緒に表示</p>
                                 <p className="my-2 text-sm text-gray-800 font-light">
-                                    この名刺の下部に他の名刺リストを表示するかどうか
+                                   「表示許可」で許可された名刺をまとめて表示することができます。
                                 </p>
                             </div>
                             <ul className="w-full sm:w-auto flex flex-wrap items-center justify-end sm:justify-between">
@@ -431,9 +430,9 @@ const CardForm = ({ editCard, closeModal }) => {
 
                         <div className="my-4 flex flex-wrap sm:flex-nowrap items-center justify-between">
                             <div className="sm:max-w-[50%]">
-                                <p className="text-base text-gray-900 font-bold">名刺リスト共有</p>
+                                <p className="text-base text-gray-900 font-bold">表示許可</p>
                                 <p className="my-2 text-sm text-gray-800 font-light">
-                                    この名刺を他の名刺のリスト表示に含めるかどうか
+                                    「他の名刺も一緒に表示」が設定された名刺内での表示を許可します。
                                 </p>
                             </div>
 

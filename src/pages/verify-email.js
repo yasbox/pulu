@@ -1,10 +1,9 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
-import Button from '@/components/Button'
+import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButton'
 import GuestLayout from '@/components/Layouts/GuestLayout'
-import Link from 'next/link'
+import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const VerifyEmail = () => {
     const { logout, resendEmailVerification } = useAuth({
@@ -16,30 +15,27 @@ const VerifyEmail = () => {
 
     return (
         <GuestLayout>
+            <Head>
+                <title>{process.env.NEXT_PUBLIC_APP_NAME} - メール認証</title>
+            </Head>
+
             <AuthCard
                 logo={
-                    <Link href="/">
-                        <a>
-                            <ApplicationLogo className="w-auto h-20 fill-current text-gray-500" />
-                        </a>
-                    </Link>
+                    <div className='text-xl font-bold text-mytextcolor'>
+                        メール認証
+                    </div>
                 }>
 
                 <div className="mb-4 text-sm text-gray-600">
                     認証用メールを確認して認証を済ませてください。届いていない場合は、下記のボタンで再送信できます。
                 </div>
 
-                {status === 'verification-link-sent' && (
-                    <div className="mb-4 font-medium text-sm text-green-600">
-                        認証用メールを送信しました。
-                    </div>
-                )}
-
                 <div className="mt-4 flex items-center justify-between">
-                    <Button
+                    <MyButton_sm
+                        className="ml-4 bg-gray-100"
                         onClick={() => resendEmailVerification({ setStatus })}>
                         認証メールを再送
-                    </Button>
+                    </MyButton_sm>
 
                     <button
                         type="button"
@@ -48,6 +44,13 @@ const VerifyEmail = () => {
                         ログアウト
                     </button>
                 </div>
+
+                {status === 'verification-link-sent' && (
+                    <div className="mt-4 font-medium text-sm text-green-600">
+                        認証用メールを送信しました。
+                    </div>
+                )}
+
             </AuthCard>
         </GuestLayout>
     )

@@ -4,7 +4,7 @@ const Default = ({ card }) => (
     <>
         <div className="px-6 py-6 flex items-start">
             {card.organization_logo &&
-                <div className="mr-4 w-[60px] h-[60px]">
+                <div className="mr-4 w-[70px] h-[60px]">
                     <img
                         className="object-contain h-full"
                         src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${card.organization_logo}`}

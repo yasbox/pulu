@@ -47,7 +47,7 @@ const Wrapper = styled.div`
       top: 50%; left: 50%;
       border-radius: 50%;
       width: 10px; height: 10px;
-      background: rgba(0, 0, 0, .1);
+      background: rgba(150, 150, 150, .5);
       animation: ${Attack} .6s ease infinite alternate;
 
       &:nth-child(1) {

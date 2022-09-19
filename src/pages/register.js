@@ -1,7 +1,7 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
-import Button from '@/components/Button'
+import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButton'
 import GuestLayout from '@/components/Layouts/GuestLayout'
+import Head from 'next/head'
 import Input from '@/components/Input'
 import InputError from '@/Components/InputError'
 import Label from '@/components/Label'
@@ -29,13 +29,15 @@ const Register = () => {
 
     return (
         <GuestLayout>
+            <Head>
+                <title>{process.env.NEXT_PUBLIC_APP_NAME} - 登録</title>
+            </Head>
+
             <AuthCard
                 logo={
-                    <Link href="/">
-                        <a>
-                            <ApplicationLogo className="w-auto h-20 fill-current text-gray-500" />
-                        </a>
-                    </Link>
+                    <div className='text-xl font-bold text-mytextcolor'>
+                        登録
+                    </div>
                 }>
 
                 <form onSubmit={submitForm}>
@@ -50,7 +52,6 @@ const Register = () => {
                             className="block mt-1 w-full"
                             onChange={event => setName(event.target.value)}
                             required
-                            autoFocus
                         />
 
                         <InputError messages={errors.name} className="mt-2" />
@@ -116,7 +117,12 @@ const Register = () => {
                             </a>
                         </Link>
 
-                        <Button className="ml-4">登録</Button>
+                        <MyButton_lg
+                            type='submit'
+                            className="ml-4 bg-gray-100"
+                        >
+                            登録
+                        </MyButton_lg>
                     </div>
                 </form>
             </AuthCard>
