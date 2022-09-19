@@ -1,7 +1,8 @@
 import useSWR from 'swr'
 import axios from '@/lib/axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import Swal from 'sweetalert2'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
@@ -27,6 +28,45 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         axios
             .post('/register', props)
             .then(() => mutate())
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
+    const edit = async ({ setErrors, ...props }) => {
+        await csrf()
+
+        setErrors([])
+
+        axios
+            .post('/edit', props)
+            .then(() => {
+                mutate()
+                Swal.fire({
+                    title: '保存しました',
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        confirmButton: 'bg-gray-100 text-black font-semibold rounded-full',
+                    }
+                })
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+            })
+    }
+
+    const del = async ({ setErrors, ...props }) => {
+        await csrf()
+
+        setErrors([])
+
+        axios
+            .post('/del', props)
+            .then(() => window.location.pathname = '/')
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -74,7 +114,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         axios
             .post('/reset-password', { token: router.query.token, ...props })
-            .then(response => router.push('/login?reset=' + btoa(response.data.status)))
+            .then(response => router.push('/login?reset=' + encodeURIComponent(response.data.status)))
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -85,7 +125,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const resendEmailVerification = ({ setStatus }) => {
         axios
             .post('/email/verification-notification')
-            .then(response => setStatus(response.data.status))
+            .then(response => setStatus(response.data.message))
     }
 
     const logout = async () => {
@@ -100,13 +140,21 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user) router.push(redirectIfAuthenticated)
-        if (window.location.pathname === "/verify-email" && user?.email_verified_at) router.push(redirectIfAuthenticated)
+
+        if (!(window.location.pathname === "/account/" || window.location.pathname === "/unregister/")) {
+            if (middleware === 'auth' && !user?.email_verified_at) router.push("/verify-email")
+        }
+
+        if (window.location.pathname === "/verify-email/" && user?.email_verified_at) router.push('/home')
+
         if (middleware === 'auth' && error) logout()
     }, [user, error])
 
     return {
         user,
         register,
+        edit,
+        del,
         login,
         forgotPassword,
         resetPassword,

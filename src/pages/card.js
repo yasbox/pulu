@@ -46,7 +46,7 @@ const Card = () => {
     )
     useEffect(() => {
         setCardsTemp(cards)
-        //console.log(cards)
+        console.log(cards)
     }, [cards])
 
     /**
@@ -87,10 +87,10 @@ const Card = () => {
                 <title>{cardsTemp[0].name ? cardsTemp[0].name : pageTitle} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
             </Head>
 
-            <div className="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-                <div className="w-full pb-16 flex items-center justify-center min-h-screen bg-my-bgcolor">
-                    <div className="w-full max-w-7xl mx-auto p-2 sm:px-6 lg:px-8">
-                        <div className="sm:p-6 max-w-4xl mx-auto bg-white overflow-hidden shadow-lg rounded-lg divide-y divide-slate-200">
+            <main className="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0">
+                <div className="w-full pb-16 flex items-center justify-center min-h-screen">
+                    <div className="w-full max-w-3xl mx-auto py-4 px-1 sm:px-6 lg:px-8">
+                        <div className="sm:p-6 bg-white overflow-hidden shadow-lg rounded-lg divide-y divide-slate-200">
 
                             {cardsTemp.map((card, index) =>
                                 <div key={index}>
@@ -137,12 +137,12 @@ const Card = () => {
 
                 <div className="absolute bottom-0 w-full px-2 py-4 sm:py-8 flex items-center justify-center">
                     <Link href="/">
-                        <a className="text-sm text-gray-500">
-                            <span className="mr-2 text-xs text-gray-400">Powerd by</span>{process.env.NEXT_PUBLIC_APP_NAME}
+                        <a className="text-sm text-gray-400">
+                            <span className="mr-2 text-xs text-gray-500">Powerd by</span>{process.env.NEXT_PUBLIC_APP_NAME}
                         </a>
                     </Link>
                 </div>
-            </div>
+            </main>
 
             <Modal
                 isOpen={modalIsOpen}

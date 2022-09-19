@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html>
+            <Html className='bg-gradient-to-tr from-mydarkcolor to-mylightcolor'>
                 <Head>
                     <link
                         href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap"
@@ -20,7 +20,6 @@ class MyDocument extends Document {
                     <link rel="manifest" href="/favicons/site.webmanifest" />
                     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
                     <meta name="msapplication-TileColor" content="#da532c" />
-                    <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
                     <meta name="theme-color" content="#ffffff" />
                 </Head>
                 <body className="antialiased">

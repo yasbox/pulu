@@ -1,13 +1,17 @@
 import Head from 'next/head'
 import Navigation from '@/components/Layouts/Navigation'
+import { useAuth } from '@/hooks/auth'
+import Loading from '@/components/Modules/Loading'
 
 const GuestLayout = ({ children }) => {
+    const { user } = useAuth({ middleware: 'guest' })
+
     return (
-        <div className="flex min-h-screen bg-gray-100">
-            <Navigation />
+        <div className="flex min-h-screen">
+            <Navigation user={user ? user : null} />
 
             {/* Page Content */}
-            <main className="grow">{children}</main>
+            <main className="grow pt-16">{children}</main>
         </div>
     )
 
@@ -16,7 +20,7 @@ const GuestLayout = ({ children }) => {
                 <title></title>
             </Head>
 
-            <div className="min-h-screen bg-gray-100">
+            <div className="min-h-screen bg-mylightcolor">
                 <div className="font-sans text-gray-900 antialiased">
                     {children}
                 </div>
