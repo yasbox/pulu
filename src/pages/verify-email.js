@@ -1,6 +1,6 @@
 import AuthCard from '@/components/AuthCard'
 import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButton'
-import GuestLayout from '@/components/Layouts/GuestLayout'
+import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
@@ -14,7 +14,7 @@ const VerifyEmail = () => {
     const [status, setStatus] = useState(null)
 
     return (
-        <GuestLayout>
+        <AppLayout>
             <Head>
                 <title>{process.env.NEXT_PUBLIC_APP_NAME} - メール認証</title>
             </Head>
@@ -52,7 +52,7 @@ const VerifyEmail = () => {
                 )}
 
             </AuthCard>
-        </GuestLayout>
+        </AppLayout>
     )
 }
 

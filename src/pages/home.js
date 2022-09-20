@@ -207,6 +207,17 @@ const home = () => {
                 <title>{process.env.NEXT_PUBLIC_APP_NAME} - {pageTitle}</title>
             </Head>
 
+            {cards.length === 0 &&
+                <div className="pt-20  max-w-2xl mx-auto sm:px-6 lg:px-8 overflow-hidden">
+                    <div className="m-4 sm:m-6 text-2xl text-white/50 text-center">
+                        名刺がありません
+                    </div>
+                    <div className="m-4 sm:m-6 text-base text-white/50 text-center">
+                        + マークから作成できます
+                    </div>
+                </div>
+            }
+
             {!isSortMode &&
                 <div className="fixed sm:static bottom-0 sm:bottom-auto w-full max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-wrap items-center justify-end sm:justify-center">
                     <div className="m-6 sm:mb-0">
@@ -377,7 +388,7 @@ const home = () => {
                     </DragDropContext>
                 }
             </div>
-            
+
             {/* カード登録編集モーダル */}
             <Modal
                 isOpen={modalIsOpen}
