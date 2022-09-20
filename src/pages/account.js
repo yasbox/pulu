@@ -93,6 +93,7 @@ const Account = () => {
                                 className="block mt-1 w-full"
                                 onChange={event => setPassword(event.target.value)}
                                 placeholder="パスワードを変更する場合のみ入力"
+                                autoComplete="new-password"
                             />
 
                             <InputError messages={errors.password} className="mt-2" />
@@ -113,6 +114,7 @@ const Account = () => {
                                     setPasswordConfirmation(event.target.value)
                                 }
                                 placeholder="パスワードを変更する場合のみ入力"
+                                autoComplete="new-password"
                             />
 
                             <InputError messages={errors.password_confirmation} className="mt-2" />

@@ -6,8 +6,9 @@ import ResponsiveNavLink, { ResponsiveNavButton } from '@/components/ResponsiveN
 import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import MyButton, { MyButton_sm } from '@/components/Modules/MyButton'
+import classNames from 'classnames'
 
 const Navigation = ({ user }) => {
     const router = useRouter()
@@ -16,8 +17,21 @@ const Navigation = ({ user }) => {
 
     const [open, setOpen] = useState(false)
 
+    const [isScroll, setIsScroll] = useState(false)
+
+    const toggleNaviBackGround = () => {
+        window.scrollY > 20
+            ? setIsScroll(true)
+            : setIsScroll(false)
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', toggleNaviBackGround)
+        return () => window.removeEventListener('scroll', toggleNaviBackGround)
+    }, [])
+
     return (
-        <nav className="fixed w-full bg-mydarkcolor/80 shadow-sm z-10">
+        <nav className={classNames({ 'bg-mybgcolor/90 drop-shadow-lg': isScroll || open }, "fixed w-full z-10 transition ease-in-out duration-150 sm:py-2")}>
 
             {/* メインメニュー */}
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,29 +42,31 @@ const Navigation = ({ user }) => {
                         <div className="flex-shrink-0 flex items-center">
                             <Link href="/">
                                 <a>
-                                    <ApplicationLogo className="block h-10 w-auto fill-current text-gray-100" />
-                                    {/* <ApplicationLogo className="block h-10 w-auto fill-current text-gray-100 invert-[1] sepia-[0] saturate-[0] hue-rotate-[84deg] brightness-[1.04] contrast-[1.05]" /> */}
+                                    <ApplicationLogo className="block h-10 sm:h-12 w-auto fill-current" />
+                                    {/* <ApplicationLogo className="block h-10 w-auto fill-current invert-[1] sepia-[0] saturate-[0] hue-rotate-[84deg] brightness-[1.04] contrast-[1.05]" /> */}
                                 </a>
                             </Link>
                         </div>
 
-                        {/* ナビゲーション */}
-                        <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            {user &&
-                                <NavLink
-                                    href="/home"
-                                    active={router.pathname === '/home'}
-                                >
-                                    ホーム
-                                </NavLink>
-                            }
-                        </div>
                     </div>
 
                     {/* ドロップダウン */}
                     {user ?
                         <>
-                            <div className="hidden sm:flex sm:items-center sm:ml-6">
+                            <div className="hidden sm:flex sm:items-center sm:justify-around sm:ml-6">
+
+                                {/* ナビゲーション */}
+                                <div className="hidden space-x-8 sm:-my-px sm:mr-10 sm:flex">
+                                    {user &&
+                                        <NavLink
+                                            href="/home"
+                                            active={router.pathname === '/home'}
+                                        >
+                                            マイ名刺
+                                        </NavLink>
+                                    }
+                                </div>
+
                                 <Dropdown
                                     align="right"
                                     trigger={
@@ -121,7 +137,7 @@ const Navigation = ({ user }) => {
                                     className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 transition duration-150 ease-in-out">
                                     <div className="flex items-center px-4">
                                         <div className="ml-3">
-                                            <div className="font-medium text-base text-gray-400">
+                                            <div className="font-medium text-base text-gray-300">
                                                 {user?.name}
                                             </div>
                                         </div>
@@ -196,13 +212,13 @@ const Navigation = ({ user }) => {
 
             {/* モバイルメニュー */}
             {open && (
-                <div className="m-4 p-4 bg-white block sm:hidden shadow-sm rounded-lg">
+                <div className="m-4 p-4 bg-white block sm:hidden rounded-lg">
                     <div className="pt-2 pb-3 space-y-1">
                         {user &&
                             <ResponsiveNavLink
                                 href="/home"
                                 active={router.pathname === '/home'}>
-                                ホーム
+                                マイ名刺
                             </ResponsiveNavLink>
                         }
                     </div>

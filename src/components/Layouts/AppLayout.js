@@ -1,11 +1,15 @@
 import Navigation from '@/components/Layouts/Navigation'
+import Footer from '@/components/Layouts/Footer'
 import { useAuth } from '@/hooks/auth'
+import Loading from '@/components/Modules/Loading'
 
 const AppLayout = ({ header, children }) => {
     const { user } = useAuth({ middleware: 'auth' })
     
+    if (!user) return <Loading isShow={true} />
+
     return (
-        <div className="flex min-h-screen">
+        <div className="flex flex-col min-h-screen">
             <Navigation user={user} />
 
             {/* Page Heading */}
@@ -16,7 +20,10 @@ const AppLayout = ({ header, children }) => {
             </header> */}
 
             {/* Page Content */}
-            <main className="grow pt-16">{children}</main>
+            <main className="grow pt-16">
+                {children}
+            </main>
+            <Footer />
         </div>
     )
 }
