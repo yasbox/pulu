@@ -18,6 +18,7 @@ import MyButton, { MyButton_lg, MyButton_sm, MyButton_add } from '@/components/M
 import { QRCodeSVG } from "qrcode.react"
 import { useAuth } from '@/hooks/auth'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import classNames from 'classnames'
 
 const pageTitle = 'マイ名刺'
 
@@ -74,6 +75,7 @@ const home = () => {
     const [qrURL, setQrURL] = useState('')
     const [cardboxs, setCardboxs] = useState(null)
     const [isSortMode, setIsSortMode] = useState(false)
+    const [isFooterVisible, setIsFooterVisible] = useState(false)
 
     const { data: cards, error, mutate } = useSWR('/api/card/all', () =>
         axios
@@ -193,6 +195,33 @@ const home = () => {
         setIsSortMode(isSortMode ? false : true)
     }
 
+    /**
+     * モバイル時のカード追加ボタンの位置調整
+     */
+    const toggleAddBottonPosition = (target) => {
+        // IntersectionObserver : 見えてるかどうか判別
+        const observer = new IntersectionObserver((entries) => {
+            for (const e of entries) {
+                setIsFooterVisible(e.isIntersecting)
+            }
+        })
+        observer.observe(target[0])
+    }
+    useEffect(() => {
+        let abortCtrl = new AbortController() // エラー対策(Can't perform a React state update on an unmounted component.)
+
+        let target = document.getElementsByTagName('footer')
+        if (target.length === 0) return
+
+        toggleAddBottonPosition(target)
+        window.addEventListener('scroll', toggleAddBottonPosition(target))
+
+        // エラー対策(Can't perform a React state update on an unmounted component.)
+        return () => {
+            abortCtrl.abort()
+        }
+    })
+
     if (!cards || !cardboxs) return <Loading isShow={true} />
 
     return (
@@ -213,14 +242,14 @@ const home = () => {
                         名刺がありません
                     </div>
                     <div className="m-4 sm:m-6 text-base text-white/50 text-center">
-                        + マークから作成できます
+                        + ボタンから作成できます
                     </div>
                 </div>
             }
 
             {!isSortMode &&
-                <div className="fixed sm:static bottom-0 sm:bottom-auto w-full max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-wrap items-center justify-end sm:justify-center">
-                    <div className="m-6 sm:mb-0">
+                <div className="fixed sm:static bottom-0 sm:bottom-auto w-full max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-wrap items-center justify-end sm:justify-center pointer-events-none">
+                    <div className={classNames({ 'mb-[100px]': isFooterVisible }, "p-6 sm:mb-0 transition-all ease-in-out duration-1000 pointer-events-auto")}>
                         <MyButton_add
                             onClick={() => openModal(null)}
                         >
@@ -233,11 +262,12 @@ const home = () => {
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 overflow-hidden flex flex-wrap items-center justify-end">
                 <div className="m-4 sm:m-6">
                     {cards.length > 1 &&
-                        <MyButton_sm
+                        <div
+                            className="text-white text-base sm:text-lg cursor-pointer"
                             onClick={() => onSortButton()}
                         >
                             {isSortMode ? '終了' : '並べ替え'}
-                        </MyButton_sm>
+                        </div>
                     }
                 </div>
             </div>

@@ -11,7 +11,7 @@ const GuestLayout = ({ children }) => {
             <Navigation user={user ? user : null} />
 
             {/* Page Content */}
-            <main className="grow pt-16">
+            <main className="relative grow pt-16 pb-8">
                 {children}
             </main>
             <Footer />
