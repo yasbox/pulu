@@ -112,14 +112,14 @@ const Card = () => {
                                             onClick={() => changeCardsSort(card.id)}
                                         >
                                             <div className="">
-                                                <div className="text-lg font-bold">
+                                                <div className="text-lg font-bold break-words">
                                                     {card.organization_name}
                                                 </div>
-                                                <div className="text-base">
+                                                <div className="text-base break-words">
                                                     {card.position_name}
                                                 </div>
                                                 {(card.organization_name === '' && card.position_name === '') &&
-                                                    <div className="text-lg font-bold">
+                                                    <div className="text-lg font-bold break-words">
                                                         {card.name}
                                                     </div>
                                                 }

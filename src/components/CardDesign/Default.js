@@ -14,13 +14,13 @@ const Default = ({ card }) => (
 
             <div className="grow">
                 {card.organization_name &&
-                    <div className="py-1 text-lg sm:text-xl font-bold">
+                    <div className="py-1 text-lg sm:text-xl font-bold break-words">
                         {card.organization_name}
                     </div>
                 }
 
                 {card.position_name &&
-                    <div className="py-1 text-base">
+                    <div className="py-1 text-base break-words">
                         {card.position_name}
                     </div>
                 }
@@ -28,28 +28,26 @@ const Default = ({ card }) => (
             
         </div>
 
-        <div className="px-6 py-6 flex flex-wrap items-center justify-center">
+        <div className="px-6 py-6 flex flex-wrap sm:flex-nowrap items-center justify-center">
 
             {card.face_photo &&
-                <div className="my-3">
+                <div className="m-3">
                     <img
-                        className="object-contain object-center m-auto"
+                        className="w-[150px] h-[150px] sm:w-[120px] sm:h-[120px] object-contain object-center m-auto"
                         src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${card.face_photo}`}
-                        width={100}
-                        height={100}
                     />
                 </div>
             }
             
-            <div className="mx-8 my-3">
+            <div className="w-full sm:w-auto sm:ml-8 my-3">
 
                 {card.name &&
-                    <div className="py-2 text-center text-4xl font-bold tracking-widest">
+                    <div className="py-2 text-[min(8vw,2rem)] sm:text-4xl font-bold tracking-widest text-center break-words">
                         {card.name}
                     </div>
                 }
                 {card.name_kana &&
-                    <div className="text-sm text-center tracking-[.3em]">
+                    <div className="text-sm tracking-[.3em] text-center break-words">
                         {card.name_kana}
                     </div>
                 }
@@ -67,7 +65,7 @@ const Default = ({ card }) => (
                 }
 
                 {card.address &&
-                    <div className="text-base font-bold">
+                    <div className="text-base font-bold break-words">
                         {card.address}
                     </div>
                 }
@@ -93,7 +91,7 @@ const Default = ({ card }) => (
             }
 
             {card.email &&
-                <div className="text-sm tracking-widest">
+                <div className="text-sm tracking-widest break-words">
                     E-mail　{card.email}
                 </div>
             }
@@ -101,7 +99,7 @@ const Default = ({ card }) => (
             {card.site &&
                 <div className="py-2">
                     <Link href={`${card.site}`} className="">
-                        <a className="text-md tracking-widest text-mylinkcolor">
+                        <a className="text-md tracking-widest text-mylinkcolor break-all">
                             {card.site}
                         </a>
                     </Link>
@@ -111,7 +109,7 @@ const Default = ({ card }) => (
         </div>
 
         {card.description &&
-            <div className="px-6 py-6 text-sm border-t border-b border-gray-200/100 whitespace-pre-wrap">
+            <div className="px-6 py-6 text-sm border-t border-b border-gray-200/100 whitespace-pre-wrap break-all">
                 {card.description}
             </div>
         }

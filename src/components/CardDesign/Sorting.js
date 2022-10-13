@@ -15,13 +15,13 @@ const Sorting = ({ card }) => (
 
                 <div className="grow">
                     {card.organization_name &&
-                        <div className="py-1 text-lg sm:text-xl font-bold">
+                        <div className="py-1 text-lg sm:text-xl font-bold break-words">
                             {card.organization_name}
                         </div>
                     }
 
                     {card.position_name &&
-                        <div className="py-1 text-base">
+                        <div className="py-1 text-base break-words">
                             {card.position_name}
                         </div>
                     }
@@ -31,10 +31,10 @@ const Sorting = ({ card }) => (
         }
 
         {!card.organization_name &&
-            <div className="px-6 py-4 flex flex-wrap items-center justify-center">
+            <div className="px-6 py-4 flex items-center justify-center">
 
                 {card.face_photo &&
-                    <div className="my-2">
+                    <div className="m-2">
                         <img
                             className="object-contain object-center m-auto"
                             src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/storage/${card.face_photo}`}
@@ -44,15 +44,15 @@ const Sorting = ({ card }) => (
                     </div>
                 }
 
-                <div className="mx-8 my-0">
+                <div className="w-full sm:w-auto sm:ml-8 my-0">
 
                     {card.name &&
-                        <div className="py-2 text-center text-3xl sm:text-4xl font-bold tracking-widest">
+                        <div className="py-2 text-center text-xl sm:text-4xl font-bold tracking-widest break-words">
                             {card.name}
                         </div>
                     }
                     {card.name_kana &&
-                        <div className="text-sm text-center tracking-[.3em]">
+                        <div className="text-sm text-center tracking-[.3em] break-words">
                             {card.name_kana}
                         </div>
                     }
