@@ -35,7 +35,7 @@ export const MyButton_sm = ({ type = 'button', className, ...props }) => (
 export const MyButton_add = ({ type = 'button', className, ...props }) => (
     <button
         type={type}
-        className={overrideTailwindClasses(`min-w-[70px] min-h-[70px] inline-flex items-center m-2 justify-center bg-sky-500 sm:bg-white border border-transparent rounded-full font-bold text-2xl text-white sm:text-black hover:text-white uppercase tracking-widest hover:bg-white/50 active:bg-gray-100 focus:outline-none focus:border-gray-300 focus:ring ring-gray-200 disabled:opacity-25 transition ease-in-out duration-150 shadow-lg ${className}`)}
+        className={overrideTailwindClasses(`min-w-[70px] min-h-[70px] inline-flex items-center m-2 justify-center bg-sky-500 sm:bg-white/80 border border-transparent rounded-full font-bold text-2xl text-white sm:text-black uppercase tracking-widest hover:bg-white disabled:opacity-25 transition ease-in-out duration-150 shadow-lg ${className}`)}
         {...props}
     />
 )

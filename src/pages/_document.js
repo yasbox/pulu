@@ -51,7 +51,8 @@ class MyDocument extends Document {
                     <meta name="theme-color" content="#142a52" />
                     <meta name="description" content="「ぷる」は、デジタル名刺を簡単に作成できる無料のサービスです。クラウド管理でいつでもどこでも編集・閲覧可能。QRコードを読み取ってもらうだけですぐに相手に送れます！"></meta>
                 </Head>
-                <body className="antialiased bg-gradient-to-tr from-mylightcolor to-mydarkcolor">
+                <body>
+                    <div className="fixed z-[-1] w-full min-h-screen antialiased bg-gradient-to-tr from-mylightcolor to-mydarkcolor"></div>
                     <Main />
                     <NextScript />
                 </body>

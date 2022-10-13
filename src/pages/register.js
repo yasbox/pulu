@@ -124,6 +124,9 @@ const Register = () => {
                             登録
                         </MyButton_lg>
                     </div>
+                    <div className="pt-6 text-center text-xs text-gray-500">
+                        ご登録の前に必ず<Link href="/terms"><a>「ご利用規約」</a></Link>をお読み下さい。
+                    </div>
                 </form>
             </AuthCard>
         </GuestLayout>

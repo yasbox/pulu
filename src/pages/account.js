@@ -41,11 +41,11 @@ const Account = () => {
                 <title>{process.env.NEXT_PUBLIC_APP_NAME} - アカウント情報</title>
             </Head>
 
-            <div className="my-4 sm:my-16 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            <div className="my-4 sm:my-16 flex flex-col sm:justify-center items-center px-1 pt-6 sm:pt-0">
                 <div className='text-xl font-bold text-mytextcolor'>
                     アカウント情報
                 </div>
-                <div className="w-full sm:max-w-md mt-6 p-6 sm:p-12 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <div className="w-full sm:max-w-md mt-6 p-6 sm:p-12 bg-white shadow-md overflow-hidden rounded-lg">
 
                     <form onSubmit={submitForm}>
                         <input type="hidden" name="id" value={id} />
