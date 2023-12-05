@@ -3,7 +3,7 @@ import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButto
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Head from 'next/head'
 import Input from '@/components/Input'
-import InputError from '@/Components/InputError'
+import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
@@ -30,7 +30,7 @@ const Register = () => {
     return (
         <GuestLayout>
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - 登録</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - 登録`}</title>
             </Head>
 
             <AuthCard
@@ -111,7 +111,7 @@ const Register = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link href="/login">
+                        <Link href="/login" legacyBehavior>
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
                                 ログインはこちら
                             </a>
@@ -125,7 +125,7 @@ const Register = () => {
                         </MyButton_lg>
                     </div>
                     <div className="pt-6 text-center text-xs text-gray-500">
-                        ご登録の前に必ず<Link href="/terms"><a>「ご利用規約」</a></Link>をお読み下さい。
+                        ご登録の前に必ず<Link href="/terms">「ご利用規約」</Link>をお読み下さい。
                     </div>
                 </form>
             </AuthCard>

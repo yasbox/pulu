@@ -4,7 +4,7 @@ import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButto
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Head from 'next/head'
 import Input from '@/components/Input'
-import InputError from '@/Components/InputError'
+import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
@@ -25,7 +25,7 @@ const ForgotPassword = () => {
     return (
         <GuestLayout>
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - パスワードリセット</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - パスワードリセット`}</title>
             </Head>
 
             <AuthCard

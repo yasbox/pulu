@@ -233,7 +233,7 @@ const home = () => {
             }>
 
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - {pageTitle}</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - ${pageTitle}`}</title>
             </Head>
 
             {cards.length === 0 &&
@@ -317,7 +317,7 @@ const home = () => {
                                     </div>
 
                                     <div className="flex items-center justify-center">
-                                        <Link href={`/card/?uuid=${card.uuid}`}>
+                                        <Link href={`/card/?uuid=${card.uuid}`} legacyBehavior>
                                             <a target="blanck_">
                                                 <div className="pt-2 px-4 min-w-[70px] bg-white border border-transparent rounded-full hover:bg-gray-100 cursor-pointer transition ease-in-out duration-150">
                                                     <img

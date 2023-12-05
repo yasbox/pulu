@@ -252,11 +252,9 @@ export default function Home() {
 
                     <div className="pb-14 text-center">
                         <Link href="/register">
-                            <a>
-                                <MyButton_lg>
-                                    アカウント作成
-                                </MyButton_lg>
-                            </a>
+                            <MyButton_lg>
+                                アカウント作成
+                            </MyButton_lg>
                         </Link>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import Input from '@/components/Input'
 import MyButton, { MyButton_lg, MyButton_md, MyButton_sm } from '@/components/Modules/MyButton'
 import Label from '@/components/Label'
 import { useCard } from '@/hooks/card'
-import InputError from '@/Components/InputError'
+import InputError from '@/components/InputError'
 
 const CardForm = ({ editCard, closeModal }) => {
 

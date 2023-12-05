@@ -41,10 +41,8 @@ const Navigation = ({ user }) => {
                         {/* ロゴ */}
                         <div className="flex-shrink-0 flex items-center">
                             <Link href="/">
-                                <a>
-                                    <ApplicationLogo className="block h-10 sm:h-12 w-auto fill-current" />
-                                    {/* <ApplicationLogo className="block h-10 w-auto fill-current invert-[1] sepia-[0] saturate-[0] hue-rotate-[84deg] brightness-[1.04] contrast-[1.05]" /> */}
-                                </a>
+                                <ApplicationLogo className="block h-10 sm:h-12 w-auto fill-current" />
+                                {/* <ApplicationLogo className="block h-10 w-auto fill-current invert-[1] sepia-[0] saturate-[0] hue-rotate-[84deg] brightness-[1.04] contrast-[1.05]" /> */}
                             </Link>
                         </div>
 
@@ -91,33 +89,31 @@ const Navigation = ({ user }) => {
                                     {/* アカウント編集 */}
                                     <DropdownButton>
                                         <Link href="/account">
-                                            <a>
-                                                <div className="flex items-center">
-                                                    <div className="flex-shrink-0">
-                                                        <svg
-                                                            className="h-6 w-6 fill-current text-gray-400"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            stroke="currentColor">
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth="2"
-                                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                                            />
-                                                        </svg>
+                                            <div className="flex items-center">
+                                                <div className="flex-shrink-0">
+                                                    <svg
+                                                        className="h-6 w-6 fill-current text-gray-400"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth="2"
+                                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <div className="ml-3">
+                                                    <div className="font-medium text-base text-gray-800">
+                                                        {user?.name}
                                                     </div>
-                                                    <div className="ml-3">
-                                                        <div className="font-medium text-base text-gray-800">
-                                                            {user?.name}
-                                                        </div>
-                                                        <div className="font-medium text-sm text-gray-500">
-                                                            {user?.email}
-                                                        </div>
+                                                    <div className="font-medium text-sm text-gray-500">
+                                                        {user?.email}
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </Link>
                                     </DropdownButton>
 
@@ -190,19 +186,15 @@ const Navigation = ({ user }) => {
                         :
                         <div className="flex items-center ml-6">
                             <Link href="/login">
-                                <a>
-                                    <MyButton_sm className={'bg-transparent text-white hover:text-black'}>
-                                        ログイン
-                                    </MyButton_sm>
-                                </a>
+                                <MyButton_sm className={'bg-transparent text-white hover:text-black'}>
+                                    ログイン
+                                </MyButton_sm>
                             </Link>
 
                             <Link href="/register">
-                                <a>
-                                    <MyButton_sm>
-                                        登録
-                                    </MyButton_sm>
-                                </a>
+                                <MyButton_sm>
+                                    登録
+                                </MyButton_sm>
                             </Link>
                         </div>
                     }
@@ -227,34 +219,32 @@ const Navigation = ({ user }) => {
                     {user &&
                         <div className="pt-4 pb-1 border-t border-gray-200/100">
                             <Link href="/account">
-                                <a>
-                                    <div className="flex items-center px-4">
-                                        <div className="flex-shrink-0">
-                                            <svg
-                                                className="h-10 w-10 fill-current text-gray-400"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                                />
-                                            </svg>
-                                        </div>
+                                <div className="flex items-center px-4">
+                                    <div className="flex-shrink-0">
+                                        <svg
+                                            className="h-10 w-10 fill-current text-gray-400"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                            />
+                                        </svg>
+                                    </div>
 
-                                        <div className="ml-3">
-                                            <div className="font-medium text-base text-gray-800">
-                                                {user?.name}
-                                            </div>
-                                            <div className="font-medium text-sm text-gray-500">
-                                                {user?.email}
-                                            </div>
+                                    <div className="ml-3">
+                                        <div className="font-medium text-base text-gray-800">
+                                            {user?.name}
+                                        </div>
+                                        <div className="font-medium text-sm text-gray-500">
+                                            {user?.email}
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </Link>
 
                             <div className="mt-3 pt-3 border-t space-y-1">

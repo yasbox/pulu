@@ -4,7 +4,7 @@ import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButto
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Head from 'next/head'
 import Input from '@/components/Input'
-import InputError from '@/Components/InputError'
+import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
@@ -42,7 +42,7 @@ const Login = () => {
     return (
         <GuestLayout>
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - ログイン</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - ログイン`}</title>
             </Head>
 
             <AuthCard
@@ -109,7 +109,7 @@ const Login = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link href="/forgot-password">
+                        <Link href="/forgot-password" legacyBehavior>
                             <a className="underline text-sm text-gray-600 hover:text-gray-900">
                                 パスワードを忘れた方
                             </a>

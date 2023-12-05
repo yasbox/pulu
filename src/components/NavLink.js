@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const NavLink = ({ active = false, children, ...props }) => (
-    <Link {...props}>
+    <Link {...props} legacyBehavior>
         <a
             className={`inline-flex items-center my-2 px-1 pt-4 pb-3 border-b-2 text-lg font-bold tracking-widest leading-5 focus:outline-none transition duration-150 ease-in-out ${
                 active

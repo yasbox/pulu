@@ -46,7 +46,6 @@ const Card = () => {
     )
     useEffect(() => {
         setCardsTemp(cards)
-        console.log(cards)
     }, [cards])
 
     /**
@@ -84,7 +83,7 @@ const Card = () => {
     return (
         <>
             <Head>
-                <title>{cardsTemp[0].name ? cardsTemp[0].name : pageTitle} - {process.env.NEXT_PUBLIC_APP_NAME}</title>
+                <title>{`${cardsTemp[0].name ? cardsTemp[0].name : pageTitle} - ${process.env.NEXT_PUBLIC_APP_NAME}`}</title>
             </Head>
 
             <main className="relative flex items-top justify-center min-h-screen sm:items-center sm:pt-0">
@@ -136,7 +135,7 @@ const Card = () => {
                 </div>
 
                 <div className="absolute bottom-0 w-full px-2 py-4 sm:py-8 flex items-center justify-center">
-                    <Link href="/">
+                    <Link href="/" legacyBehavior>
                         <a className="text-sm text-white/80">
                             <span className="mr-2 text-xs text-white/60">Powerd by</span>{process.env.NEXT_PUBLIC_APP_NAME}
                         </a>

@@ -98,7 +98,7 @@ const Default = ({ card }) => (
 
             {card.site &&
                 <div className="py-2">
-                    <Link href={`${card.site}`} className="">
+                    <Link href={`${card.site}`} className="" legacyBehavior>
                         <a className="text-md tracking-widest text-mylinkcolor break-all">
                             {card.site}
                         </a>

@@ -16,7 +16,7 @@ const VerifyEmail = () => {
     return (
         <AppLayout>
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - メール認証</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - メール認証`}</title>
             </Head>
 
             <AuthCard

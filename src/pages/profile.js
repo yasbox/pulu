@@ -20,7 +20,7 @@ export default function Profile() {
     return (
         <GuestLayout>
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - {pageTitle}</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - ${pageTitle}`}</title>
             </Head>
 
             <div className="flex items-center justify-center">
@@ -41,21 +41,17 @@ export default function Profile() {
 
                         <h3 className="mt-6 py-2 text-lg sm:text-xl font-bold">運営</h3>
                         <div className="px-2">
-                            <p class="my-2 font-bold">Webstusio YAS</p>
+                            <p className="my-2 font-bold">Webstusio YAS</p>
                             <Link href="https://studio-yas.jp/">
-                                <a>
-                                    https://studio-yas.jp/
-                                </a>
+                                https://studio-yas.jp/
                             </Link>
                         </div>
 
                         <h3 className="mt-6 py-2 text-lg sm:text-xl font-bold">ご連絡先</h3>
                         <div className="px-2">
-                            <p class="my-2 font-bold">お問い合わせフォーム</p>
+                            <p className="my-2 font-bold">お問い合わせフォーム</p>
                             <Link href="https://studio-yas.jp/contact/">
-                                <a>
-                                    https://studio-yas.jp/contact/
-                                </a>
+                                https://studio-yas.jp/contact/
                             </Link>
                         </div>
                         

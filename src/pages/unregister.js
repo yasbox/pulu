@@ -3,7 +3,7 @@ import MyButton, { MyButton_lg, MyButton_sm } from '@/components/Modules/MyButto
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 import Input from '@/components/Input'
-import InputError from '@/Components/InputError'
+import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
@@ -45,7 +45,7 @@ const Unregister = () => {
     return (
         <AppLayout>
             <Head>
-                <title>{process.env.NEXT_PUBLIC_APP_NAME} - 登録解除</title>
+                <title>{`${process.env.NEXT_PUBLIC_APP_NAME} - 登録解除`}</title>
             </Head>
 
             <div className="my-4 sm:my-16 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
