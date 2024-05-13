@@ -17,6 +17,14 @@ module.exports = {
         domains: [process.env.NEXT_PUBLIC_BACKEND_HOSTNAME],
     },
 
+    compiler: {
+        styledComponents: {
+            "ssr": true
+        },
+    },
+
+    output: 'export',
+
     /* assetPrefix: "/sub",
     basePath: "/sub", */
 
